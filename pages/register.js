@@ -1,4 +1,4 @@
-import { Button } from "@nature-ui/core"
+import { Button, Input } from "@chakra-ui/react"
 import shallow from "zustand/shallow"
 import AuthForm from "../components/authForm"
 import useAuthStore from "../stores/auth"
@@ -36,11 +36,9 @@ const RegisterPage = () => {
     <BaseLayout className="justify-center min-h-screen">
       <AuthForm title="Register" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-y-4">
-          <Button color="blue-500" form="authForm">
-            Register
-          </Button>
-          <Link href="/login">
-            <Button>Login</Button>
+          <Input type="submit" colorScheme="blue" value="Register" />
+          <Link href="/">
+            <Button>Back</Button>
           </Link>
         </div>
       </AuthForm>

@@ -1,5 +1,6 @@
 import create from "zustand"
 import baseAxios from "../lib/axios"
+import Axios from "axios"
 import cookies from "js-cookie"
 import { decode } from "jsonwebtoken"
 import { useEffect } from "react"
@@ -7,6 +8,7 @@ import { useEffect } from "react"
 const useAuthStore = create((set, get) => ({
   token: undefined,
   user: undefined,
+  axios: undefined,
 
   Provider: ({ children }) => {
     useEffect(() => {
@@ -27,6 +29,12 @@ const useAuthStore = create((set, get) => ({
       set({
         token,
         user,
+        axios: Axios.create({
+          ...baseAxios.defaults,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }),
       })
     } catch (e) {
       return

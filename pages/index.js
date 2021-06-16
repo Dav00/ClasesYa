@@ -1,9 +1,11 @@
 import Layout from "../components/layout"
-
+import SearchBar from "../components/searchBar"
 const HomePage = () => (
-  <Layout>
-    <h1>Hola</h1>
+ <>
+ <Layout>
+    <SearchBar />
   </Layout>
+</>
 )
 
 export default HomePage

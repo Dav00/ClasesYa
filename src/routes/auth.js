@@ -4,22 +4,14 @@ const router = express.Router()
 const Yup = require("yup")
 const bcrypt = require("bcryptjs")
 const signToken = require("../helpers/auth").signToken
+const validate = require("../middlewares/validate")
 
 const AuthBody = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  password: Yup.string()
-    .min(5, "Password must have at least 5 characters")
-    .required("Password is required"),
+  email: Yup.string().email().required(),
+  password: Yup.string().min(5).required(),
 })
 
-router.post("/register", async (req, res) => {
-  try {
-    await AuthBody.validate(req.body)
-  } catch (e) {
-    return res.status(400).json(e.errors)
-  }
-  //Si hay un error
-
+router.post("/register", validate(AuthBody), async (req, res) => {
   const { email, password } = req.body
 
   let user
@@ -37,12 +29,7 @@ router.post("/register", async (req, res) => {
   res.json({ token: signToken(user) })
 })
 
-router.post("/login", async (req, res) => {
-  try {
-    await AuthBody.validate(req.body)
-  } catch (e) {
-    return res.status(400).json(e.errors)
-  }
+router.post("/login", validate(AuthBody), async (req, res) => {
   const { email, password } = req.body
 
   const user = await prisma.user.findUnique({

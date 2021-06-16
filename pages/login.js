@@ -1,4 +1,4 @@
-import { Button } from "@nature-ui/core"
+import { Button, Input } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
 import shallow from "zustand/shallow"
 import AuthForm from "../components/authForm"
@@ -38,11 +38,9 @@ const LoginPage = () => {
     <BaseLayout className="justify-center min-h-screen">
       <AuthForm title="Login" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-y-4">
-          <Button color="blue-500" form="authForm">
-            Login
-          </Button>
-          <Link href="/register">
-            <Button>Register</Button>
+          <Input type="submit" colorScheme="blue" value="Login" />
+          <Link href="/">
+            <Button>Back</Button>
           </Link>
         </div>
       </AuthForm>

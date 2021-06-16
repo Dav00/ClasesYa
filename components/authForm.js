@@ -5,10 +5,9 @@ import {
   Input,
   FormLabel,
   FormErrorMessage,
-} from "@nature-ui/core"
+} from "@chakra-ui/react"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as Yup from "yup"
-
 const AuthFormValidationSchema = Yup.object().shape({
   email: Yup.string()
     .email("Invalid email. Eg: (test@test.com)")
